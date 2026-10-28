@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-container">
+    <div class="hero-badge">Final Year B.Tech Project</div>
+    <h1 class="hero-title">AI-Powered Resume<br>Screening System</h1>
+    <p class="hero-subtitle">Upload a candidate's resume and get an instant role prediction and job-match score powered by machine learning. Screen smarter, hire faster.</p>
+    <div class="hero-buttons">
+      <a href="#screen" class="btn-primary">Screen a Resume</a>
+      <a href="{{ url_for('about') }}" class="btn-outline">Learn More</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-number">85.3%</span>
+        <span class="stat-label">Model Accuracy</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-number">25+</span>
+        <span class="stat-label">Job Categories</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-number">&lt;2s</span>
+        <span class="stat-label">Screening Time</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="section" id="how-it-works">
+  <div class="section-container">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-subtitle">Three simple steps to screen any resume</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
+          </svg>
+        </div>
+        <h3>Upload Resume</h3>
+        <p>Upload a PDF or DOCX resume file using our drag-and-drop interface.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <h3>AI Analysis</h3>
+        <p>Our ML model extracts text, cleans it, and runs TF-IDF + LinearSVC classification.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <h3>Get Results</h3>
+        <p>Receive the predicted job category and match score with a clear verdict.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Screen Resume Section -->
+<section class="section section-alt" id="screen">
+  <div class="section-container">
+    <h2 class="section-title">Screen a Resume</h2>
+    <p class="section-subtitle">Upload a resume and optionally paste a job description for match scoring</p>
+
+    <form class="card upload-card" method="post" action="{{ url_for('predict') }}" enctype="multipart/form-data">
+      <div class="field">
+        <label class="field-label" for="resume_file">Resume file</label>
+        <label class="dropzone" for="resume_file" id="dropzone">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor"
+               stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3v12" />
+            <path d="M7 8l5-5 5 5" />
+            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+          </svg>
+          <span class="dropzone-text">Click to upload</span>
+          <span class="dropzone-sub">or drag and drop &mdash; PDF or DOCX</span>
+          <span class="dropzone-filename" id="filename-display"></span>
+        </label>
+        <input type="file" id="resume_file" name="resume_file" accept=".pdf,.docx" required class="visually-hidden">
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="jd_text">Job description <span class="optional-tag">optional</span></label>
+        <textarea id="jd_text" name="jd_text" rows="7"
+          placeholder="Paste the job description here to compute a match score..."></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary">Screen Resume</button>
+    </form>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="section" id="features">
+  <div class="section-container">
+    <h2 class="section-title">Key Features</h2>
+    <p class="section-subtitle">What makes our system effective</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </div>
+        <h3>Multi-Format Support</h3>
+        <p>Accepts both PDF and DOCX resume formats with accurate text extraction.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h3>ML-Powered Prediction</h3>
+        <p>Uses TF-IDF vectorization with LinearSVC classifier achieving 85.3% accuracy.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <h3>Job Match Scoring</h3>
+        <p>Computes cosine similarity between resume and job description for match scoring.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <h3>Privacy First</h3>
+        <p>Resumes are processed in-memory and never stored on disk. Your data stays private.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <h3>Instant Results</h3>
+        <p>Get category predictions and match scores in under 2 seconds.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3>25+ Job Categories</h3>
+        <p>Trained on a diverse dataset covering roles from Engineering to Healthcare.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tech Stack Section -->
+<section class="section section-alt" id="tech">
+  <div class="section-container">
+    <h2 class="section-title">Technology Stack</h2>
+    <p class="section-subtitle">Built with modern tools and frameworks</p>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <h4>Python</h4>
+        <p>Core programming language</p>
+      </div>
+      <div class="tech-card">
+        <h4>Flask</h4>
+        <p>Lightweight web framework</p>
+      </div>
+      <div class="tech-card">
+        <h4>scikit-learn</h4>
+        <p>Machine learning library</p>
+      </div>
+      <div class="tech-card">
+        <h4>NLTK</h4>
+        <p>Natural language processing</p>
+      </div>
+      <div class="tech-card">
+        <h4>TF-IDF</h4>
+        <p>Text vectorization</p>
+      </div>
+      <div class="tech-card">
+        <h4>LinearSVC</h4>
+        <p>Classification model</p>
+      </div>
+      <div class="tech-card">
+        <h4>pdfplumber</h4>
+        <p>PDF text extraction</p>
+      </div>
+      <div class="tech-card">
+        <h4>python-docx</h4>
+        <p>DOCX file parsing</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const fileInput = document.getElementById('resume_file');
+  const filenameDisplay = document.getElementById('filename-display');
+  const dropzone = document.getElementById('dropzone');
+
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files.length > 0) {
+      filenameDisplay.textContent = fileInput.files[0].name;
+      dropzone.classList.add('has-file');
+    } else {
+      filenameDisplay.textContent = '';
+      dropzone.classList.remove('has-file');
+    }
+  });
+
+  ['dragover', 'dragleave', 'drop'].forEach((eventName) => {
+    dropzone.addEventListener(eventName, (e) => e.preventDefault());
+  });
+  dropzone.addEventListener('dragover', () => dropzone.classList.add('drag-active'));
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-active'));
+  dropzone.addEventListener('drop', (e) => {
+    dropzone.classList.remove('drag-active');
+    if (e.dataTransfer.files.length > 0) {
+      fileInput.files = e.dataTransfer.files;
+      fileInput.dispatchEvent(new Event('change'));
+    }
+  });
+</script>
+{% endblock %}

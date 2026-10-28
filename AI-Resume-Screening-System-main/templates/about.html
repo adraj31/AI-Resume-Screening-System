@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% block title %}About - AI Resume Screening System{% endblock %}
+
+{% block content %}
+<!-- About Hero -->
+<section class="page-hero">
+  <div class="section-container">
+    <h1 class="page-hero-title">About the Project</h1>
+    <p class="page-hero-subtitle">A final year B.Tech project that brings AI to the recruitment process</p>
+  </div>
+</section>
+
+<!-- Project Overview -->
+<section class="section">
+  <div class="section-container">
+    <div class="about-grid">
+      <div class="about-content">
+        <h2>Project Overview</h2>
+        <p>The <strong>AI Resume Screening System</strong> is a final year B.Tech Computer Science project that automates the initial screening of candidate resumes using Machine Learning and Natural Language Processing techniques.</p>
+        <p>In traditional hiring, recruiters spend an average of 6-8 seconds scanning each resume. With hundreds of applications per position, this process is time-consuming and prone to human bias. Our system addresses this by providing instant, consistent, and data-driven resume screening.</p>
+        <p>The system predicts the most suitable job category for a given resume and optionally computes a match score against a specific job description using cosine similarity.</p>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-card">
+          <span class="highlight-number">85.3%</span>
+          <span class="highlight-label">Classification Accuracy</span>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-number">962</span>
+          <span class="highlight-label">Training Samples</span>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-number">3</span>
+          <span class="highlight-label">Models Compared</span>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-number">25+</span>
+          <span class="highlight-label">Job Categories</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Methodology -->
+<section class="section section-alt">
+  <div class="section-container">
+    <h2 class="section-title">Our Methodology</h2>
+    <p class="section-subtitle">A structured approach to building an accurate resume classifier</p>
+    <div class="methodology-grid">
+      <div class="method-card">
+        <div class="method-number">01</div>
+        <h3>Data Collection</h3>
+        <p>We used the Kaggle Resume Dataset containing 962 resumes across 25+ job categories including Data Science, Web Development, HR, and more.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-number">02</div>
+        <h3>Text Preprocessing</h3>
+        <p>Resumes undergo cleaning to remove URLs, hashtags, mentions, special characters, and stopwords using NLTK for consistent text normalization.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-number">03</div>
+        <h3>Feature Extraction</h3>
+        <p>TF-IDF (Term Frequency-Inverse Document Frequency) vectorization converts cleaned text into numerical features with max_features=1500.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-number">04</div>
+        <h3>Model Training</h3>
+        <p>Three classifiers were compared: LinearSVC (85.3%), KNN (79.4%), and Random Forest (73.5%). LinearSVC was selected as the best performer.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-number">05</div>
+        <h3>JD Matching</h3>
+        <p>Cosine similarity between TF-IDF vectors of the resume and job description provides a 0-100% match score with calibrated thresholds.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-number">06</div>
+        <h3>Web Deployment</h3>
+        <p>The trained model is serialized using pickle and served through a Flask web application with an intuitive drag-and-drop interface.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Model Comparison -->
+<section class="section">
+  <div class="section-container">
+    <h2 class="section-title">Model Comparison</h2>
+    <p class="section-subtitle">We evaluated three machine learning algorithms</p>
+    <div class="comparison-table-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Algorithm</th>
+            <th>Accuracy</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="selected-row">
+            <td><strong>LinearSVC</strong></td>
+            <td>Support Vector Classification</td>
+            <td><strong>85.3%</strong></td>
+            <td><span class="table-badge badge-selected">Selected</span></td>
+          </tr>
+          <tr>
+            <td>KNN</td>
+            <td>K-Nearest Neighbors</td>
+            <td>79.4%</td>
+            <td><span class="table-badge badge-tested">Tested</span></td>
+          </tr>
+          <tr>
+            <td>Random Forest</td>
+            <td>Ensemble Decision Trees</td>
+            <td>73.5%</td>
+            <td><span class="table-badge badge-tested">Tested</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="section section-alt">
+  <div class="section-container">
+    <h2 class="section-title">Project Team</h2>
+    <p class="section-subtitle">Final Year B.Tech Computer Science Students</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">RS</div>
+        <h3>Rahul Sharma</h3>
+        <p class="team-role">Team Lead &amp; ML Engineer</p>
+        <p class="team-desc">Responsible for model training, evaluation, and overall project architecture.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">PP</div>
+        <h3>Priya Patel</h3>
+        <p class="team-role">Backend Developer</p>
+        <p class="team-desc">Built the Flask application, API routes, and file processing pipeline.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">AK</div>
+        <h3>Amit Kumar</h3>
+        <p class="team-role">Frontend Developer</p>
+        <p class="team-desc">Designed and implemented the responsive UI with drag-and-drop features.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">NV</div>
+        <h3>Neha Verma</h3>
+        <p class="team-role">Data Analyst &amp; Tester</p>
+        <p class="team-desc">Handled data preprocessing, EDA, and system testing.</p>
+      </div>
+    </div>
+
+    <div class="supervisor-card">
+      <h3>Project Supervisor</h3>
+      <p><strong>Dr. Rajesh Gupta</strong> &mdash; Associate Professor, Department of Computer Science &amp; Engineering, XYZ University</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-container cta-section">
+    <h2>Ready to try it out?</h2>
+    <p>Upload a resume and see the AI screening system in action.</p>
+    <a href="{{ url_for('index') }}#screen" class="btn-primary">Screen a Resume</a>
+  </div>
+</section>
+{% endblock %}

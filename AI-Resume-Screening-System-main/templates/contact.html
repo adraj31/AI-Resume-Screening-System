@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% block title %}Contact - AI Resume Screening System{% endblock %}
+
+{% block content %}
+<!-- Contact Hero -->
+<section class="page-hero">
+  <div class="section-container">
+    <h1 class="page-hero-title">Contact Us</h1>
+    <p class="page-hero-subtitle">Have questions about the project? Get in touch with our team</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-container">
+    <div class="contact-grid">
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h2>Get In Touch</h2>
+        <p>We'd love to hear from you! Whether you have questions about the project, want to collaborate, or need help with the system, feel free to reach out.</p>
+
+        <div class="contact-cards">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Email</h4>
+              <p>ai.resume.project@gmail.com</p>
+              <p>rahul.sharma.cs@xyzuniv.edu.in</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Phone</h4>
+              <p>+91 98765 43210 (Rahul)</p>
+              <p>+91 87654 32109 (Priya)</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Address</h4>
+              <p>Department of Computer Science &amp; Engineering</p>
+              <p>XYZ University of Technology</p>
+              <p>123 University Road, Tech City</p>
+              <p>Maharashtra, India - 411001</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Office Hours</h4>
+              <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+              <p>Saturday: 10:00 AM - 2:00 PM</p>
+              <p>Sunday: Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form-wrapper">
+        <div class="card">
+          <h3>Send us a Message</h3>
+          <form class="contact-form" id="contactForm">
+            <div class="field">
+              <label class="field-label" for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="field">
+              <label class="field-label" for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="field">
+              <label class="field-label" for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="What is this about?">
+            </div>
+            <div class="field">
+              <label class="field-label" for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Send Message</button>
+          </form>
+          <div class="form-success" id="formSuccess" style="display:none;">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <h3>Message Sent!</h3>
+            <p>Thank you for reaching out. We'll get back to you soon.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Quick Contact -->
+<section class="section section-alt">
+  <div class="section-container">
+    <h2 class="section-title">Team Members</h2>
+    <p class="section-subtitle">Reach out directly to any team member</p>
+    <div class="team-contact-grid">
+      <div class="team-contact-card">
+        <div class="team-avatar">RS</div>
+        <h4>Rahul Sharma</h4>
+        <p class="team-role">Team Lead</p>
+        <p>rahul.sharma.cs@xyzuniv.edu.in</p>
+        <p>+91 98765 43210</p>
+      </div>
+      <div class="team-contact-card">
+        <div class="team-avatar">PP</div>
+        <h4>Priya Patel</h4>
+        <p class="team-role">Backend Developer</p>
+        <p>priya.patel.cs@xyzuniv.edu.in</p>
+        <p>+91 87654 32109</p>
+      </div>
+      <div class="team-contact-card">
+        <div class="team-avatar">AK</div>
+        <h4>Amit Kumar</h4>
+        <p class="team-role">Frontend Developer</p>
+        <p>amit.kumar.cs@xyzuniv.edu.in</p>
+        <p>+91 76543 21098</p>
+      </div>
+      <div class="team-contact-card">
+        <div class="team-avatar">NV</div>
+        <h4>Neha Verma</h4>
+        <p class="team-role">Data Analyst</p>
+        <p>neha.verma.cs@xyzuniv.edu.in</p>
+        <p>+91 65432 10987</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    this.style.display = 'none';
+    document.querySelector('.contact-form-wrapper h3').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'flex';
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% block title %}Result - AI Resume Screening System{% endblock %}
+
+{% block content %}
+<!-- Result Hero -->
+<section class="page-hero">
+  <div class="section-container">
+    <h1 class="page-hero-title">Screening Results</h1>
+    <p class="page-hero-subtitle">AI-powered analysis for {{ result.filename }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="result-container">
+
+    <!-- Top Row: Category + Score side by side -->
+    <div class="result-top-grid">
+      <!-- Category Card -->
+      <div class="card result-card">
+        <span class="result-label">Predicted Job Category</span>
+        <span class="category-badge">{{ result.category }}</span>
+        <p class="result-filename">{{ result.filename }}</p>
+        {% if result.analysis and result.analysis.experience_level %}
+          <div class="experience-tag">
+            <span class="exp-label">Experience Level:</span>
+            <span class="exp-value">{{ result.analysis.experience_level }}</span>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Score / Rating Card -->
+      <div class="card result-card">
+        {% if result.score is defined %}
+          <span class="result-label">Job Match Score</span>
+          <div class="match-score-row">
+            <span class="match-percent level-{{ result.level }}">{{ result.score }}%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill level-{{ result.level }}" style="width: {{ result.score }}%;"></div>
+          </div>
+          <span class="verdict-badge level-{{ result.level }}">{{ result.verdict }}</span>
+        {% else %}
+          <span class="result-label">Overall Resume Rating</span>
+          {% if result.analysis and result.analysis.overall_rating %}
+            <div class="rating-display">
+              <span class="rating-number">{{ result.analysis.overall_rating }}</span>
+              <span class="rating-max">/ 10</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill {% if result.analysis.overall_rating >= 7 %}level-high{% elif result.analysis.overall_rating >= 4 %}level-medium{% else %}level-low{% endif %}"
+                   style="width: {{ result.analysis.overall_rating * 10 }}%;"></div>
+            </div>
+          {% else %}
+            <div class="no-jd-note">
+              <p>No job description provided &mdash; showing category prediction only.</p>
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+
+    {% if result.analysis %}
+    <!-- AI Summary -->
+    <div class="card analysis-card">
+      <div class="analysis-header">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22l-.75-12.07A4.001 4.001 0 0 1 12 2z"/>
+          <path d="M8 6a4 4 0 0 0-4 4c0 1.95 1.4 3.58 3.25 3.93"/>
+          <path d="M16 6a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93"/>
+        </svg>
+        <h2>AI Resume Analysis</h2>
+        <span class="powered-by">Powered by Groq AI</span>
+      </div>
+
+      {% if result.analysis.summary %}
+        <div class="summary-box">
+          <p>{{ result.analysis.summary }}</p>
+        </div>
+      {% endif %}
+
+      <!-- Strengths & Weaknesses -->
+      <div class="sw-grid">
+        <div class="sw-card sw-strengths">
+          <h3>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Strengths
+          </h3>
+          <ul>
+            {% for item in result.analysis.strengths %}
+              <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="sw-card sw-weaknesses">
+          <h3>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            Weaknesses
+          </h3>
+          <ul>
+            {% for item in result.analysis.weaknesses %}
+              <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Skills Found & Missing -->
+      {% if result.analysis.skills_found or result.analysis.missing_skills %}
+      <div class="skills-section">
+        {% if result.analysis.skills_found %}
+        <div class="skills-block">
+          <h3>Skills Identified</h3>
+          <div class="skill-tags">
+            {% for skill in result.analysis.skills_found %}
+              <span class="skill-tag skill-found">{{ skill }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% if result.analysis.missing_skills %}
+        <div class="skills-block">
+          <h3>Recommended Skills to Add</h3>
+          <div class="skill-tags">
+            {% for skill in result.analysis.missing_skills %}
+              <span class="skill-tag skill-missing">{{ skill }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      <!-- JD Match Feedback -->
+      {% if result.analysis.jd_match_feedback %}
+      <div class="jd-feedback-box">
+        <h3>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+          Job Description Match Feedback
+        </h3>
+        <p>{{ result.analysis.jd_match_feedback }}</p>
+      </div>
+      {% endif %}
+
+      <!-- Improvement Suggestions -->
+      {% if result.analysis.suggestions %}
+      <div class="suggestions-section">
+        <h3>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+          </svg>
+          Improvement Suggestions
+        </h3>
+        <ol class="suggestions-list">
+          {% for suggestion in result.analysis.suggestions %}
+            <li>{{ suggestion }}</li>
+          {% endfor %}
+        </ol>
+      </div>
+      {% endif %}
+
+      <!-- ATS Tips -->
+      {% if result.analysis.ats_tips %}
+      <div class="ats-section">
+        <h3>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          ATS Optimization Tips
+        </h3>
+        <ul class="ats-list">
+          {% for tip in result.analysis.ats_tips %}
+            <li>{{ tip }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="result-actions">
+      <a href="{{ url_for('index') }}#screen" class="btn-primary" style="width:auto; margin-top:0; padding: 0.85rem 2.5rem;">Screen Another Resume</a>
+      <a href="{{ url_for('index') }}" class="btn-secondary" style="margin-top:0;">Back to Home</a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

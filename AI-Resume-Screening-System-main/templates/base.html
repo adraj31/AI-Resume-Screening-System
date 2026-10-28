@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}AI Resume Screening System{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="{{ url_for('index') }}" class="brand">
+        <span class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor"
+               stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h9.5" />
+            <path d="M14 2l5 5" />
+            <path d="M14 2v5h5" />
+            <line x1="7" y1="11" x2="12" y2="11" />
+            <line x1="7" y1="15" x2="10" y2="15" />
+            <circle cx="17" cy="17" r="3" />
+            <line x1="19.3" y1="19.3" x2="22" y2="22" />
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-title">AI Resume Screener</span>
+        </span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="{{ url_for('index') }}" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">Home</a></li>
+        <li><a href="{{ url_for('about') }}" class="nav-link {% if request.endpoint == 'about' %}active{% endif %}">About</a></li>
+        <li><a href="{{ url_for('contact') }}" class="nav-link {% if request.endpoint == 'contact' %}active{% endif %}">Contact</a></li>
+        <li><a href="{{ url_for('index') }}#screen" class="btn-nav">Screen Resume</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="page">
+        <div class="flash" role="alert">
+          {% for message in messages %}<p>{{ message }}</p>{% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand footer-brand">
+            <span class="brand-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                   stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h9.5" />
+                <path d="M14 2l5 5" /><path d="M14 2v5h5" />
+                <line x1="7" y1="11" x2="12" y2="11" />
+                <line x1="7" y1="15" x2="10" y2="15" />
+                <circle cx="17" cy="17" r="3" />
+                <line x1="19.3" y1="19.3" x2="22" y2="22" />
+              </svg>
+            </span>
+            <span class="brand-text">
+              <span class="brand-title">AI Resume Screener</span>
+            </span>
+          </div>
+          <p class="footer-desc">An AI-powered resume screening system built as a final year B.Tech project. Uses machine learning to predict job categories and match resumes to job descriptions.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About Project</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+            <li><a href="{{ url_for('index') }}#screen">Screen Resume</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Technology</h4>
+          <ul class="footer-links">
+            <li>Python &amp; Flask</li>
+            <li>scikit-learn (LinearSVC)</li>
+            <li>TF-IDF Vectorization</li>
+            <li>NLP with NLTK</li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Contact</h4>
+          <ul class="footer-links">
+            <li>ai.resume.project@gmail.com</li>
+            <li>+91 98765 43210</li>
+            <li>Dept. of Computer Science</li>
+            <li>XYZ University, India</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 AI Resume Screening System &mdash; Final Year Project | Model: TF-IDF + LinearSVC &middot; 85.3% Accuracy</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', function() {
+      document.getElementById('navLinks').classList.toggle('open');
+      this.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
